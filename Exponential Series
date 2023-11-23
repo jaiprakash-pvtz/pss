@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function to calculate the factorial of a number
+double factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1.0;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+// Function to calculate the exponential series
+double calculateExponential(double x, int terms) {
+    double result = 1.0; // Initialize result with the first term (i = 0)
+
+    for (int i = 1; i < terms; i++) {
+        // Calculate each term of the series
+        double term = pow(x, i) / factorial(i);
+
+        // Add the term to the result
+        result += term;
+    }
+
+    return result;
+}
+
+int main() {
+    double x;
+    int terms;
+
+    // Get the value of x and the number of terms from the user
+    printf("Enter the value of x: ");
+    scanf("%lf", &x);
+
+    printf("Enter the number of terms: ");
+    scanf("%d", &terms);
+
+    // Calculate and print the result of the exponential series
+    double result = calculateExponential(x, terms);
+    printf("e^(-%lf) = %lf\n", x, result);
+
+    return 0;
+}
