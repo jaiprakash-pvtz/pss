@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function to calculate the factorial of a number
+double factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1.0;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+// Function to calculate cosine using Taylor series
+double calculateCosine(double x, int terms) {
+    double result = 1.0; // Initialize result with the first term (i = 0)
+    int sign = -1; // Start with a negative sign for the second term (i = 1)
+
+    for (int i = 1; i < terms; i++) {
+        // Calculate each term of the series
+        double term = pow(x, 2 * i) / factorial(2 * i);
+
+        // Add the term based on the sign
+        result += sign * term;
+
+        // Flip the sign for the next term
+        sign = -sign;
+    }
+
+    return result;
+}
+
+int main() {
+    double angle;
+    int terms;
+
+    // Get angle in radians and the number of terms from the user
+    printf("Enter the angle in radians: ");
+    scanf("%lf", &angle);
+
+    printf("Enter the number of terms: ");
+    scanf("%d", &terms);
+
+    // Calculate and print the cosine value
+    double cosineValue = calculateCosine(angle, terms);
+    printf("cos(%lf) = %lf\n", angle, cosineValue);
+
+    return 0;
+}
